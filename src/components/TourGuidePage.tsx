@@ -17,6 +17,7 @@ import {
   MapIcon,
   Heart
 } from 'lucide-react';
+import { API_ENDPOINTS } from '../config';
 
 interface TourGuidePageProps {
   user: { name: string; email: string } | null;
@@ -63,8 +64,6 @@ const TourGuidePage: React.FC<TourGuidePageProps> = ({ user, onLogout }) => {
   const [tourPlan, setTourPlan] = useState<TourPlan | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const API_URL = 'http://localhost:5000/api/tour-plan';
-
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!city.trim()) return;
@@ -79,7 +78,7 @@ const TourGuidePage: React.FC<TourGuidePageProps> = ({ user, onLogout }) => {
         userId: user?.email // Include user info if needed
       };
 
-      const response = await fetch(API_URL, {
+      const response = await fetch(API_ENDPOINTS.TOUR_PLAN, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
